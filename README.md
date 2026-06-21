@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:14B8A6,45:A855F7,100:F97316&height=220&section=header&text=OpenLeash%20Plugins&fontSize=56&fontColor=ffffff&fontAlignY=38&desc=Composable%20agent%20safety%20for%20the%20OpenLeash%20pipeline.&descSize=18&descAlignY=58" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:14B8A6,45:A855F7,100:F97316&height=220&section=header&text=OpenLeash%20Plugins&fontSize=56&fontColor=ffffff&fontAlignY=38&desc=Composable%20features%20for%20the%20OpenLeash%20agent%20pipeline.&descSize=18&descAlignY=58" width="100%" />
 
 <p>
   <a href="https://openleash.com"><img src="https://img.shields.io/badge/OpenLeash-openleash.com-14B8A6?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/Contract-events%20%2B%20capabilities-F97316?style=for-the-badge&logo=typescript&logoColor=white" />
 </p>
 
-<h3>Build focused plugins that extend OpenLeash without importing OpenLeash internals.</h3>
+<h3>Add focused features to the OpenLeash agent pipeline with clear events, settings, and capabilities.</h3>
 
 <img src="./assets/openleash-plugin-pipeline.png" alt="OpenLeash plugin pipeline" width="860" />
 
@@ -16,17 +16,49 @@
 
 ---
 
-## What This Repo Is
+## What Is A Plugin?
 
-This repo contains examples, templates, and first-party OpenLeash plugins.
+A plugin is a small feature that runs when something happens in an agent session.
 
-OpenLeash is an interception layer for AI agents. Agent-specific hooks are normalized into OpenLeash events, then the enabled plugins for that event run in a deterministic pipeline.
+An agent does something. OpenLeash intercepts it, normalizes it into an event, finds the plugins subscribed to that event, runs them in order, and returns a result when the agent needs one.
 
 ```text
-agent hook -> desktop relay -> client-api -> event -> ordered plugin pipeline
+agent action
+  -> OpenLeash intercepts
+  -> OpenLeash emits an event
+  -> matching plugins run in order
+  -> OpenLeash returns allow, deny, ask, transformed prompt, inventory, or audit context
 ```
 
+That means plugins can do more than security. They can transform prompts, reduce token cost, scan skills, inventory MCP tools, create audit context, ask for approval, or attach useful metadata to the session.
+
 Plugins are contained. They do not import OpenLeash database modules, evaluators, server handlers, or model-key readers. They declare what they need in a manifest and receive stable runtime capabilities from OpenLeash.
+
+---
+
+## Real Examples
+
+```text
+User submits a long prompt
+  -> event: prompt.beforeSubmit
+  -> prompt-compression shortens it
+  -> dlp checks the final prompt
+  -> security-evaluator decides if it can continue
+```
+
+```text
+Agent calls an MCP tool
+  -> event: tool.beforeUse
+  -> security-evaluator checks policy
+  -> mcp-scanner records tool inventory and audit context
+```
+
+```text
+OpenLeash sees a new agent skill
+  -> event: skill.changed
+  -> skill-scanner reviews the skill for suspicious instructions
+  -> OpenLeash stores the finding or asks for review
+```
 
 ---
 
