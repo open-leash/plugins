@@ -31,7 +31,7 @@ Internal modules can change at any time. Capabilities are the compatibility prom
 - `publisher`: person, company, or organization publishing the plugin.
 - `runtime`: execution runtime, for example `node` or `openleash-core`.
 - `entrypoint`: plugin handler entrypoint.
-- `stages`: OpenLeash stages the plugin subscribes to.
+- `events`: OpenLeash events the plugin subscribes to.
 - `permissions`: requested capabilities and data access.
 - `effects`: what the plugin can do: `observe`, `transform`, `deny`, `ask`, `inventory`.
 - `ordering`: deterministic pipeline hints.

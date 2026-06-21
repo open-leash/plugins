@@ -24,7 +24,7 @@ my-plugin/
 The manifest is the plugin contract:
 
 - metadata for store/catalog display
-- subscribed stages
+- subscribed events
 - permissions
 - effects
 - ordering
@@ -41,7 +41,7 @@ export const manifest = {
   publisher: "acme",
   runtime: "node",
   entrypoint: "src/index.ts",
-  stages: ["prompt.beforeSubmit"],
+  events: ["prompt.beforeSubmit"],
   permissions: ["event:read", "prompt:read", "audit:write", "storage:write"],
   effects: ["observe"],
   ordering: {
@@ -90,9 +90,9 @@ export async function run(input, capabilities) {
 }
 ```
 
-## Stages
+## Events
 
-Use the narrowest stage possible:
+Use the narrowest event possible:
 
 - `openleash.startup`
 - `agent.detected`
@@ -154,18 +154,17 @@ Good key shapes:
 - `cache/<hash>`
 - `notifications/<dedupe-key>`
 
-## First-Party Plugin Repos
+## First-Party Plugins
 
 These plugins ship preinstalled in OpenLeash and can be used as reference implementations:
 
-- `open-leash/openleash-plugin-prompt-compression`
-- `open-leash/openleash-plugin-dlp`
-- `open-leash/openleash-plugin-security-evaluator`
-- `open-leash/openleash-plugin-mcp-scanner`
-- `open-leash/openleash-plugin-skill-scanner`
+- `plugins/prompt-compression`
+- `plugins/dlp`
+- `plugins/security-evaluator`
+- `plugins/mcp-scanner`
+- `plugins/skill-scanner`
 
 ## Examples
 
 - `examples/basic-observer` shows a tiny read-only plugin.
 - `examples/prompt-evaluator` shows storage, notification, and typed findings.
-

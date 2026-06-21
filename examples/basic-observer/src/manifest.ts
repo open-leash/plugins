@@ -6,7 +6,7 @@ export const manifest = {
   publisher: "openleash",
   runtime: "node",
   entrypoint: "src/index.ts",
-  stages: ["prompt.beforeSubmit"],
+  events: ["prompt.beforeSubmit"],
   permissions: ["event:read", "prompt:read", "storage:write", "audit:write"],
   effects: ["observe"],
   ordering: {
