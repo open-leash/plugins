@@ -1,7 +1,7 @@
 export const manifest = {
   id: "openleash.dlp",
   name: "Data Leakage Prevention",
-  description: "Masks or blocks sensitive prompt data before submission.",
+  description: "Mask secrets before agents send them.",
   version: "1.0.0",
   publisher: "openleash",
   runtime: "node",

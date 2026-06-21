@@ -1,7 +1,7 @@
 export const manifest = {
   id: "openleash.siem-exporter",
   name: "SIEM Exporter",
-  description: "Forwards OpenLeash security events and incidents to SOC and SIEM systems.",
+  description: "Send agent incidents to your SOC stack.",
   version: "1.0.0",
   publisher: "openleash",
   runtime: "node",

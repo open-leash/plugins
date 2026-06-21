@@ -1,7 +1,7 @@
 export const manifest = {
   id: "openleash.prompt-compression",
   name: "Prompt Compression",
-  description: "Compresses user prompts before they reach the agent model to reduce token usage.",
+  description: "Trim noisy context before every model call.",
   version: "1.0.0",
   publisher: "openleash",
   runtime: "node",
