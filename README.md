@@ -176,6 +176,7 @@ Use the narrowest event possible:
 - `openleash.startup`
 - `agent.detected`
 - `skill.changed`
+- `log.emitted`
 - `prompt.beforeSubmit`
 - `agent.response`
 - `tool.beforeUse`
@@ -200,6 +201,7 @@ Declare only what the plugin needs:
 - `storage:read`
 - `storage:write`
 - `audit:write`
+- `log:write`
 - `notification:send`
 
 ---
@@ -214,9 +216,12 @@ await capabilities.dlp.inspect({ prompt, action: "mask", categories: ["pii", "ke
 await capabilities.security.evaluatePolicies({ request, policies });
 await capabilities.notification.send({ title: "Review needed", body: "Risky command held." });
 await capabilities.storage.set({ key: "cache/hash", value: { ok: true } });
+await capabilities.log.emit({ level: "security", message: "Custom evaluator flagged a risky action." });
 ```
 
 If a plugin needs a new privileged operation, add a narrow capability to the OpenLeash plugin contract. Do not import an internal OpenLeash module as a shortcut.
+
+Plugins can request side effects, but OpenLeash owns final delivery. Notification requests can be suppressed, deduped, silenced, or routed by core policy. Plugin logs are stored as structured `log.emitted` events and can be exported by SIEM Exporter without giving plugins direct database or network access.
 
 ---
 

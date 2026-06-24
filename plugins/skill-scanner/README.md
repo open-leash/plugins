@@ -16,11 +16,10 @@ See [`src/manifest.ts`](src/manifest.ts).
 
 Key points:
 
-- Permissions: `event:read`, `filesystem:read`, `decision:write`, `model:invoke`, `audit:write`, `notification:send`
+- Permissions: `event:read`, `filesystem:read`, `decision:write`, `model:invoke`, `audit:write`, `log:write`, `notification:send`
 - Effects: `observe`, `ask`, `inventory`
 - Settings: `enabled`, `suspiciousRiskThreshold`
 
 ## Plugin Builder Note
 
 Skill scanners should read only the files OpenLeash passes or authorizes. If a scanner needs broader file access, request `filesystem:read` and explain why in the plugin README.
-

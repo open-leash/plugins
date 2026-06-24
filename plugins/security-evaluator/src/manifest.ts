@@ -7,7 +7,7 @@ export const manifest = {
   runtime: "node",
   entrypoint: "src/index.ts",
   events: ["prompt.beforeSubmit", "agent.response", "tool.beforeUse", "tool.afterUse"],
-  permissions: ["event:read", "prompt:read", "tool:read", "decision:write", "model:invoke", "audit:write", "notification:send"],
+  permissions: ["event:read", "prompt:read", "tool:read", "decision:write", "model:invoke", "audit:write", "log:write", "notification:send"],
   effects: ["observe", "ask", "deny"],
   ordering: {
     priority: 300,

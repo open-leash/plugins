@@ -20,11 +20,10 @@ See [`src/manifest.ts`](src/manifest.ts).
 
 Key points:
 
-- Permissions: `event:read`, `prompt:read`, `tool:read`, `decision:write`, `model:invoke`, `audit:write`, `notification:send`
+- Permissions: `event:read`, `prompt:read`, `tool:read`, `decision:write`, `model:invoke`, `audit:write`, `log:write`, `notification:send`
 - Effects: `observe`, `ask`, `deny`
 - Settings: `enabled`, `policySet`
 
 ## Plugin Builder Note
 
 Policy-aware plugins should return findings and status. Avoid writing directly to approval or audit tables.
-
