@@ -1,6 +1,6 @@
-# OpenLeash Plugin: Security Evaluator
+# OpenLeash Plugin: rules-enforcer
 
-First-party OpenLeash plugin for evaluating prompts, agent responses, and tool actions against active policy.
+First-party OpenLeash plugin for evaluating prompts, agent responses, and tool actions against configured enforceable rules.
 
 This plugin ships preinstalled with OpenLeash. It is the reference for plugins that return allow, deny, or ask decisions through the pipeline.
 
@@ -9,10 +9,10 @@ This plugin ships preinstalled with OpenLeash. It is the reference for plugins t
 - Events: `prompt.beforeSubmit`, `agent.response`, `tool.beforeUse`, `tool.afterUse`
 - Runs after `openleash.dlp` for prompts
 - Uses policy evaluation capabilities
-- Can request human review
+- Each rule has an action: `ask` creates an approval; `block` denies immediately
 - Can send notifications through OpenLeash-owned notification delivery
 
-The plugin does not directly create desktop popups. It returns a typed result and uses `capabilities.notification` when it wants a notification. OpenLeash core owns desktop, mobile, dashboard, audit, and native hook response delivery.
+The plugin does not directly create desktop popups. It returns a typed result and uses OpenLeash capabilities when it wants notification-shaped behavior. OpenLeash core owns desktop, mobile, web, dashboard, audit, and native hook response delivery.
 
 ## Manifest
 
@@ -22,7 +22,7 @@ Key points:
 
 - Permissions: `event:read`, `prompt:read`, `tool:read`, `decision:write`, `model:invoke`, `audit:write`, `log:write`, `notification:send`
 - Effects: `observe`, `ask`, `deny`
-- Settings: `enabled`, `policySet`
+- Settings: `enabled`, `rules[]` where each rule has `text` and `action` (`ask` by default, or `block`)
 
 ## Plugin Builder Note
 

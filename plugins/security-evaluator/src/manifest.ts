@@ -1,7 +1,7 @@
 export const manifest = {
-  id: "openleash.security-evaluator",
-  name: "Security Evaluator",
-  description: "Approve, deny, or log risky agent actions.",
+  id: "openleash.rules-enforcer",
+  name: "rules-enforcer",
+  description: "Watch agent conversations and pause when configured rules are violated.",
   version: "1.0.0",
   publisher: "openleash",
   runtime: "node",
@@ -18,13 +18,22 @@ export const manifest = {
     additionalProperties: false,
     properties: {
       enabled: { type: "boolean" },
-      policySet: { type: "string" }
+      rules: {
+        type: "array",
+        items: {
+          type: "object",
+          additionalProperties: false,
+          properties: {
+            text: { type: "string" },
+            action: { type: "string", enum: ["ask", "block"] }
+          }
+        }
+      }
     }
   },
   defaultConfig: {
     enabled: true,
-    policySet: "active"
+    rules: []
   },
-  tags: ["security", "policy", "approval"]
+  tags: ["security", "rules", "policy", "approval"]
 };
-

@@ -11,7 +11,7 @@ export const manifest = {
   effects: ["observe", "inventory"],
   ordering: {
     priority: 400,
-    after: ["openleash.security-evaluator"]
+    after: ["openleash.rules-enforcer"]
   },
   defaultConfig: {
     enabled: true,

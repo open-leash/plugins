@@ -1,7 +1,6 @@
 {
-  "name": "@openleash/plugin-security-evaluator",
+  "name": "@openleash/plugin-rules-enforcer",
   "version": "1.0.0",
   "type": "module",
   "private": false
 }
-

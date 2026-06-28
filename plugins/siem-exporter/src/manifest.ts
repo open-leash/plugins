@@ -11,7 +11,7 @@ export const manifest = {
   effects: ["observe", "notify"],
   ordering: {
     priority: 900,
-    after: ["openleash.security-evaluator", "openleash.mcp-scanner"]
+    after: ["openleash.rules-enforcer", "openleash.mcp-scanner"]
   },
   configSchema: {
     type: "object",

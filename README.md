@@ -34,6 +34,8 @@ That means plugins can do more than security. They can transform prompts, reduce
 
 Plugins are contained. They do not import OpenLeash database modules, evaluators, server handlers, or model-key readers. They declare what they need in a manifest and receive stable runtime capabilities from OpenLeash.
 
+They also do not get broad access to the user's computer. Host context is exposed through narrow OpenLeash capabilities. For example, plugins that need agent instruction files use `capabilities.context.instructions.list()`; OpenLeash discovers known files such as `CLAUDE.md`, `AGENTS.md`, Cursor rules, Cline rules, OpenCode rules, Windsurf rules, and Copilot instructions, then passes normalized content to the plugin. The plugin can read the provided content or parsed lines, but it cannot scan arbitrary files unless OpenLeash adds and approves a specific capability for that data source.
+
 ---
 
 ## Real Examples
@@ -43,13 +45,13 @@ User submits a long prompt
   -> event: prompt.beforeSubmit
   -> prompt-compression shortens it
   -> dlp checks the final prompt
-  -> security-evaluator decides if it can continue
+  -> rules-enforcer decides if it can continue
 ```
 
 ```text
 Agent calls an MCP tool
   -> event: tool.beforeUse
-  -> security-evaluator checks policy
+  -> rules-enforcer checks policy
   -> mcp-scanner records tool inventory and audit context
 ```
 
@@ -68,7 +70,7 @@ OpenLeash sees a new agent skill
 plugins/
   prompt-compression/
   dlp/
-  security-evaluator/
+  rules-enforcer/
   mcp-scanner/
   skill-scanner/
 
@@ -196,6 +198,7 @@ Declare only what the plugin needs:
 - `tool:read`
 - `decision:write`
 - `model:invoke`
+- `instructions:read`
 - `filesystem:read`
 - `filesystem:write`
 - `storage:read`
@@ -214,6 +217,7 @@ Capabilities are the stable boundary between plugins and OpenLeash internals.
 await capabilities.prompt.compress({ prompt, level: "standard" });
 await capabilities.dlp.inspect({ prompt, action: "mask", categories: ["pii", "keys"] });
 await capabilities.security.evaluatePolicies({ request, policies });
+const instructionFiles = await capabilities.context.instructions.list({ scope: "project" });
 await capabilities.notification.send({ title: "Review needed", body: "Risky command held." });
 await capabilities.storage.set({ key: "cache/hash", value: { ok: true } });
 await capabilities.log.emit({ level: "security", message: "Custom evaluator flagged a risky action." });
@@ -250,7 +254,7 @@ These plugins ship preinstalled in OpenLeash and can be used as reference implem
 
 - [`plugins/prompt-compression`](plugins/prompt-compression)
 - [`plugins/dlp`](plugins/dlp)
-- [`plugins/security-evaluator`](plugins/security-evaluator)
+- [`plugins/rules-enforcer`](plugins/rules-enforcer)
 - [`plugins/mcp-scanner`](plugins/mcp-scanner)
 - [`plugins/skill-scanner`](plugins/skill-scanner)
 

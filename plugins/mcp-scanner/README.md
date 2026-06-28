@@ -7,7 +7,7 @@ This plugin ships preinstalled with OpenLeash. It is a reference for read-only t
 ## Behavior
 
 - Events: `tool.beforeUse`, `tool.afterUse`
-- Runs after `openleash.security-evaluator`
+- Runs after `openleash.rules-enforcer`
 - Reads normalized tool call context
 - Returns inventory metadata and findings
 

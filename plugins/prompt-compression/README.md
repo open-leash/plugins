@@ -14,7 +14,7 @@ This plugin ships preinstalled with OpenLeash. The repo is also a reference for 
 
 ```text
 prompt.beforeSubmit:
-openleash.prompt-compression -> openleash.dlp -> openleash.security-evaluator
+openleash.prompt-compression -> openleash.dlp -> openleash.rules-enforcer
 ```
 
 ## Manifest
